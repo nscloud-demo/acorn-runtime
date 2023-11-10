@@ -8,6 +8,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -18,7 +19,7 @@ jobs:
     runs-on:
       - nscloud-ubuntu-22.04-amd64-32x64-with-cache
       - nscloud-cache-size-100gb
-      - nscloud-cache-tag-acorn-runtime  
+      - nscloud-cache-tag-acorn-runtime
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -40,15 +41,15 @@ jobs:
       #     registry: ghcr.io
       #     username: ${{ github.actor }}
       #     password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Install Cosign
-        uses: sigstore/cosign-installer@main
-        with:
-          cosign-release: "v1.4.1"
-      - name: Setup Cosign
-        run: |
-          echo "${COSIGN_KEY}" > "$GITHUB_WORKSPACE/cosign.key"
-        env:
-          COSIGN_KEY: ${{ secrets.COSIGN_KEY }}
+      # - name: Install Cosign
+      #   uses: sigstore/cosign-installer@main
+      #   with:
+      #     cosign-release: "v1.4.1"
+      # - name: Setup Cosign
+      #   run: |
+      #     echo "${COSIGN_KEY}" > "$GITHUB_WORKSPACE/cosign.key"
+      #   env:
+      #     COSIGN_KEY: ${{ secrets.COSIGN_KEY }}
       - run: make validate-code
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v4
