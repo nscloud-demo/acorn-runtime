@@ -20,6 +20,7 @@ jobs:
       - nscloud-ubuntu-22.04-amd64-32x64-with-cache
       - nscloud-cache-size-100gb
       - nscloud-cache-tag-acorn-runtime
+      - nscloud-exp-runner-tool-cache-50gb
     steps:
       - name: Checkout
         uses: actions/checkout@v3
