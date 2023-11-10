@@ -62,13 +62,13 @@ checksum:
   extra_files:
     - glob: "./releases/*-macOS-universal.zip"
 
-signs:
-  - id: cosign
-    cmd: cosign
-    stdin: "{{ .Env.COSIGN_PASSWORD }}"
-    args:
-      ["sign-blob", "--key=cosign.key", "--output=${signature}", "${artifact}"]
-    artifacts: checksum
+# signs:
+#   - id: cosign
+#     cmd: cosign
+#     stdin: "{{ .Env.COSIGN_PASSWORD }}"
+#     args:
+#       ["sign-blob", "--key=cosign.key", "--output=${signature}", "${artifact}"]
+#     artifacts: checksum
 
 changelog:
   use: github
@@ -85,7 +85,7 @@ release:
     name: runtime
   prerelease: auto
   extra_files:
-    - glob: ./cosign.pub
+    # - glob: ./cosign.pub
     - glob: "./releases/*-macOS-universal.zip"
 
 brews:
@@ -158,7 +158,6 @@ docker_manifests:
     image_templates:
       - ghcr.io/acorn-io/runtime:v{{ .Version }}-amd64
       - ghcr.io/acorn-io/runtime:v{{ .Version }}-arm64
-
-docker_signs:
-  - artifacts: all
-    stdin: "{{ .Env.COSIGN_PASSWORD }}"
+# docker_signs:
+#   - artifacts: all
+#     stdin: "{{ .Env.COSIGN_PASSWORD }}"
