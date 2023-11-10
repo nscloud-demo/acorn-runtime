@@ -109,6 +109,7 @@ dockers:
     image_templates:
       - ghcr.io/acorn-io/runtime:v{{ .Version }}-amd64
     build_flag_templates:
+      - "--builder=nsc-remote"
       - "--target=goreleaser"
       - "--pull"
       - "--label=org.opencontainers.image.created={{.Date}}"
@@ -131,6 +132,7 @@ dockers:
     image_templates:
       - ghcr.io/acorn-io/runtime:v{{ .Version }}-arm64
     build_flag_templates:
+      - "--builder=nsc-remote"
       - "--target=goreleaser"
       - "--pull"
       - "--label=org.opencontainers.image.created={{.Date}}"
